@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--Index Transportes-->
+<html lang="esp" xmlns:th="www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TRANSPORTES</title>
+    <!--Librerias de Bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body class="bg-dark">
+    <nav class="navbar navbar-dark bg-secondary">
+      <form class="container-fluid justify-content-start">
+        <a class="navbar-brand">CRUD TRANSPORTES</a>
+        <button
+          type="button"
+          class="btn btn-dark"
+          data-bs-toggle="modal"
+          data-bs-target="#guardarModal"
+        >
+          ALTA TRANSPORTES
+        </button>
+      </form>
+    </nav>
+    <div>
+      <table class="table table-dark table-striped table-sm">
+        <thead>
+          <h2 class="fs-2 bg-transparent text-white">LISTA DE TRANSPORTES</h2>
+          <tr>
+            <th>ID</th>
+            <th>VEHICULO</th>
+            <th>NUM. ASIENTOS</th>
+            <th>COMBUSTIBLE</th>
+            <th>DISPONIBILIDAD</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+          <tr></tr>
+        </thead>
+        <tbody>
+          <!--Recorrer la coleccion de registros u objetos con thymeleaf-->
+          <tr th:each="p: ${lista}">
+            <th th:text="${p.id}"></th>
+            <th th:text="${p.vehiculo}"></th>
+            <th th:text="${p.num_asientos}"></th>
+            <th th:text="${p.combustible}"></th>
+            <th th:text="${p.disponibilidad}"></th>
+            <th>
+              <a
+                class="nav-link active"
+                th:href="@{/api/TransportesCtrl/buscar/}+${p.id}"
+              >
+                EDITAR
+              </a>
+            </th>
+            <th><a class="nav-link active"  th:href="@{/api/TransportesCtrl/buscarE/}+${p.id}"> ELIMINAR </a></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal Agregar  -->
+    <div class="modal fade" id="guardarModal">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content bg-secondary">
+          <div class="modal-header">
+            <h4 class="modal-title">ALTA TRANSPORTE</h4>
+          </div>
+          <!-- Formulario de Guardar -->
+          <div class="row">
+            <div class="col-2">
+              <label for="exampleInputEmail1">ID</label>
+            </div>
+            <div class="col-2">
+              <label for="exampleInputEmail1">VEHICULO</label>
+            </div>
+            <div class="col-2">
+              <label for="exampleInputEmail1">NUM. ASIENTOS</label>
+            </div>
+            <div class="col-2">
+              <label for="exampleInputEmail1">COMBUSTIBLE</label>
+            </div>
+            <div class="col-2">
+              <label for="exampleInputEmail1">DISPONIBILIDAD</label>
+            </div>
+          </div>
+          <form
+            th:action="@{/api/TransportesCtrl/guardar}"
+            method="post"
+            th:object="${tr}"
+          >
+            <div class="row">
+              <div class="col-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="id"
+                  placeholder="Ingrese placa"
+                />
+              </div>
+              <div class="col-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="vehiculo"
+                  placeholder="Tipo de vehiculo"
+                />
+              </div>
+              <div class="col-2">
+                <input
+                  type="number"
+                  class="form-control"
+                  name="num_asientos"
+                  placeholder="Numero de asientos"
+                />
+              </div>
+              <div class="col-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="combustible"
+                  placeholder="Tipo de combustible"
+                />
+              </div>
+              <div class="col-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="disponibilidad"
+                  placeholder="Disponibilidad"
+                />
+              </div>
+            </div>
+            <!-- Termina Formulario de Guardar -->
+            <div class="modal-footer justify-content-between">
+              <button type="submit" class="btn btn-dark">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Termina Modal Agregar  -->
+
+    <!--Librerias de jquery-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+      integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
